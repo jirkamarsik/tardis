@@ -5,4 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [com.cemerick/pomegranate "0.2.0"]
-                 [org.clojure/core.logic "0.8.5"]])
+                 [org.clojure/tools.namespace "0.2.4"]
+                 [org.clojure/core.logic "0.8.5"]]
+  :repl-options {:init (do (require 'tardis.core)
+                           (tardis.core/wake-up-tardis))})
