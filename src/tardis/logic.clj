@@ -68,23 +68,25 @@
 
 
 (def render-hiero (-> (make-hierarchy)
-                      (derive 'and    :binary-op)
-                      (derive 'or     :binary-op)
-                      (derive 'impl   :binary-op)
-                      (derive '=      :binary-op)
-                      (derive 'not    :unary-op)
-                      (derive 'lambda :binder)
-                      (derive 'exists :binder)
-                      (derive 'forall :binder)))
+                      (derive 'and     :binary-op)
+                      (derive 'or      :binary-op)
+                      (derive 'impl    :binary-op)
+                      (derive '=       :binary-op)
+                      (derive 'part-of :binary-op)
+                      (derive 'not     :unary-op)
+                      (derive 'lambda  :binder)
+                      (derive 'exists  :binder)
+                      (derive 'forall  :binder)))
 
-(def symbol-table {'and    "∧"
-                   'or     "∨"
-                   'impl   "→"
-                   '=      "="
-                   'not    "¬"
-                   'lambda "λ"
-                   'exists "∃"
-                   'forall "∀"})
+(def symbol-table {'and     "∧"
+                   'or      "∨"
+                   'impl    "→"
+                   '=       "="
+                   'part-of "⊆"
+                   'not     "¬"
+                   'lambda  "λ"
+                   'exists  "∃"
+                   'forall  "∀"})
 
 (defmulti render
   (fn [form]
