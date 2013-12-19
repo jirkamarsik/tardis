@@ -68,14 +68,14 @@
 
 
 (def render-hiero (-> (make-hierarchy)
-                      (derive 'and    'binary-op)
-                      (derive 'or     'binary-op)
-                      (derive 'impl   'binary-op)
-                      (derive '=      'binary-op)
-                      (derive 'not    'unary-op)
-                      (derive 'lambda 'binder)
-                      (derive 'exists 'binder)
-                      (derive 'forall 'binder)))
+                      (derive 'and    :binary-op)
+                      (derive 'or     :binary-op)
+                      (derive 'impl   :binary-op)
+                      (derive '=      :binary-op)
+                      (derive 'not    :unary-op)
+                      (derive 'lambda :binder)
+                      (derive 'exists :binder)
+                      (derive 'forall :binder)))
 
 (def symbol-table {'and    "∧"
                    'or     "∨"
@@ -96,13 +96,13 @@
 (defmethod render :var [v]
   (name v))
 
-(defmethod render 'binary-op [[op x y]]
+(defmethod render :binary-op [[op x y]]
   (str "(" (render x) " " (symbol-table op) " " (render y) ")"))
 
-(defmethod render 'unary-op [[op x]]
+(defmethod render :unary-op [[op x]]
   (str "(" (symbol-table op) (render x) ")"))
 
-(defmethod render 'binder [[binder [var] body]]
+(defmethod render :binder [[binder [var] body]]
   (str (symbol-table binder) (render var) "." "(" (render body) ")"))
 
 (defmethod render :default [[pred & args]]
