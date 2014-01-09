@@ -92,11 +92,11 @@
   (fn [form]
     (if (coll? form)
       (first form)
-      :var))
+      :terminal))
   :hierarchy #'render-hiero)
 
-(defmethod render :var [v]
-  (name v))
+(defmethod render :terminal [v]
+  (str v))
 
 (defmethod render :binary-op [[op x y]]
   (str "(" (render x) " " (symbol-table op) " " (render y) ")"))
