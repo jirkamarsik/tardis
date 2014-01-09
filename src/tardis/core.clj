@@ -1,13 +1,14 @@
 (ns tardis.core
   (:require [cemerick.pomegranate :as pom]
             [clojure.java.io :as io]
+            [clojure.string :as str]
             [clojure.tools.namespace.find :as ns-find]))
 
 (defn wake-up-tardis []
-  (let [source-file (:file (meta #'wake-up-tardis))
-        source-dir (.substring source-file 0 (.lastIndexOf source-file "/"))]
-    (doseq [ns (ns-find/find-namespaces-in-dir (io/file source-dir))]
-      (require ns))))
+  (doseq [classpath-entry (str/split (System/getProperty "java.class.path") #":")
+          :when (.endsWith classpath-entry "tardis/src")
+          ns (ns-find/find-namespaces-in-dir (io/file classpath-entry))]
+    (require ns)))
 
 (defn equip-sonic-screwdriver []
   (let [tardis-nss (filter #(.startsWith (name (ns-name %)) "tardis") (all-ns))
