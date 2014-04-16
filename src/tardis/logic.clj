@@ -17,12 +17,13 @@
     post]
      (make-implicationo ['not [['and [['and A] B]] C]] post)))
 
-(defn use-forall-in-everyo [pre post]
+(defn use-forallo [pre post]
   (fresh [step var body body']
          (pass-neg-through-exo pre step)
          (== step ['forall ['lambda [var] body]])
          (== post ['forall ['lambda [var] body']])
          (conde [(make-implicationo body body')]
+                [(undo-double-negationo body body')]
                 [(use-forall-in-everyo body body')])))
 
 (defne introduce-binderso [pre post]
@@ -63,7 +64,7 @@
 (def clean
   (comp (-> uncurryo -all -*)
         (-> introduce-binderso -all -*)
-        (-> use-forall-in-everyo -all -*)
+        (-> use-forallo -all -*)
         (-> undo-double-negationo -all -*)))
 
 
