@@ -24,7 +24,7 @@
          (== post ['forall ['lambda [var] body']])
          (conde [(make-implicationo body body')]
                 [(undo-double-negationo body body')]
-                [(use-forall-in-everyo body body')])))
+                [(use-forallo body body')])))
 
 (defne introduce-binderso [pre post]
   ([[quantifier ['lambda [var] body]]
